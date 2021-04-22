@@ -1,5 +1,4 @@
-import styled from "styled-components";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { getLabels } from "./api/api";
 import Main from "./components/Main/Main";
 import Header from "./components/Header/Header";
@@ -18,7 +17,7 @@ const App = () => {
   return (
     <>
       <Header />
-      <Main />
+      <Main labels={labels} />
     </>
   );
 };
