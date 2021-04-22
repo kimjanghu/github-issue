@@ -1,5 +1,26 @@
+import styled from "styled-components";
+import { useState, useEffect } from "react";
+import { getLabels } from "./api/api";
+import Main from "./components/Main/Main";
+import Header from "./components/Header/Header";
+
 const App = () => {
-  return <div className="App">안녕하세요</div>;
+  const [labels, setLabels] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getLabels();
+      setLabels(() => [...data]);
+    };
+    fetchData()
+  }, [labels]);
+
+  return (
+    <>
+      <Header />
+      <Main />
+    </>
+  );
 };
 
 export default App;
