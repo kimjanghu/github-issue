@@ -11,8 +11,8 @@ const App = () => {
       const data = await getLabels();
       setLabels(() => [...data]);
     };
-    fetchData()
-  }, [labels]);
+    fetchData();
+  }, []);
 
   return (
     <>

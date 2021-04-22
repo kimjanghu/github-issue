@@ -6,7 +6,7 @@ const HeaderSection = styled.header`
   justify-content: center;
   width: 100%;
   height: 100px;
-  background-color: #000;
+  background-color: #242a2f;
   color: #fff;
   font-size: 24px;
 `;
