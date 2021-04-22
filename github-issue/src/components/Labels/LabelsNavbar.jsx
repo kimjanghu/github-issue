@@ -6,12 +6,13 @@ import OperationButton from "../Buttons/OperateButton"
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: 32px 0;
 `
 const Type = styled.div`
   display: flex;
 `
 
-const LabelsNavbar = ({ type, setType }) => {
+const LabelsNavbar = ({ type, setType, setNewLabelFlag, newLabelFlag }) => {
   return (
     <Wrapper>
       <Type>
@@ -19,7 +20,7 @@ const LabelsNavbar = ({ type, setType }) => {
         <TypeButton name="Milestones" flag={type==="Milestones"} setType={setType} />
       </Type>
       <div>
-        <OperationButton name="New label" />
+        <OperationButton name="New label" setNewLabelFlag={setNewLabelFlag} newLabelFlag={newLabelFlag}/>
       </div>
     </Wrapper>
   )

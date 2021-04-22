@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 // Normal background color: #F8FAFB
-const Button = styled.button`
+const Button = styled.div`
   border: 1px solid #f6f8fa;
   padding: 10px 16px;
   text-align: center;
@@ -12,10 +12,12 @@ const Button = styled.button`
   background-color: #31c453;
 `
 
-
-const OperateButton = ({ name }) => {
+const OperateButton = ({ name, setNewLabelFlag, newLabelFlag }) => {
+  const toggleNewLabelFlag = () => {
+    setNewLabelFlag(!newLabelFlag)
+  }
   return (
-    <Button>
+    <Button onClick={toggleNewLabelFlag}>
       {name}
     </Button>
   )
