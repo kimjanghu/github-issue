@@ -6,6 +6,33 @@ import { NAV_MANU, BUTTON_NAME } from "../../utils/constants";
 import TypeButton from "../Buttons/TypeButton";
 import OperationButton from "../Buttons/OperateButton";
 
+const LabelsNavbar = ({ type, setType, setNewLabelFlag, newLabelFlag }) => {
+  return (
+    <Wrapper>
+      <Type>
+        <TypeButton 
+          name={NAV_MANU.LABELS} 
+          typeFlag={type===NAV_MANU.LABELS}
+          setType={setType}
+        />
+        <TypeButton 
+          name={NAV_MANU.MILESTONES} 
+          typeFlag={type===NAV_MANU.MILESTONES} 
+          setType={setType} 
+        />
+      </Type>
+      <div>
+        <OperationButton 
+          name={BUTTON_NAME.NEW_LABEL} 
+          setNewLabelFlag={setNewLabelFlag} 
+          newLabelFlag={newLabelFlag}
+          buttonType={true}
+        />
+      </div>
+    </Wrapper>
+  )
+}
+
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -14,23 +41,5 @@ const Wrapper = styled.div`
 const Type = styled.div`
   display: flex;
 `
-
-const labels = NAV_MANU.LABELS;
-const milestones = NAV_MANU.MILESTONES;
-const newLabel = BUTTON_NAME.NEW_LABEL;
-
-const LabelsNavbar = ({ type, setType, setNewLabelFlag, newLabelFlag }) => {
-  return (
-    <Wrapper>
-      <Type>
-        <TypeButton name={labels} typeFlag={type===labels} setType={setType} />
-        <TypeButton name={milestones} typeFlag={type===milestones} setType={setType} />
-      </Type>
-      <div>
-        <OperationButton name={newLabel} setNewLabelFlag={setNewLabelFlag} newLabelFlag={newLabelFlag}/>
-      </div>
-    </Wrapper>
-  )
-}
       
 export default LabelsNavbar;
