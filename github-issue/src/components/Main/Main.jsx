@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+
+import { NAV_MANU } from "../../utils/constants"
+
 import Navbar from "../Navbar/Navbar";
 import LabelsWrapper from "../Labels/LabelsWrapper";
-import LabelsFormSection from "../Labels/LabelsFormSection"
+import LabelsFormSection from "../Labels/LabelsFormSection";
 
 const MainSection = styled.section`
   width: 80%;
@@ -10,7 +13,7 @@ const MainSection = styled.section`
 `
 
 const Main = ({ labels }) => {
-  const [type, setType] = useState("Labels")
+  const [type, setType] = useState(NAV_MANU.LABELS)
   const [newLabelFlag, setNewLabelFlag] = useState(false)
 
   return (
