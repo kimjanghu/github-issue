@@ -12,24 +12,17 @@ const Button = styled.div`
   text-align: center;
   font-weight: bold;
   cursor: pointer;
-  
-  &.non-active {
-    color: #595959;
-    background-color: #fff;
-  }
-
-  &.active {
-    color: white;
-    background-color: #0f65d7;
-  }
+  color: ${({ typeFlag }) => typeFlag ? "#fff" : "#595959"};
+  background-color: ${({ typeFlag }) => typeFlag ? "#0f65d7" : "#fff"};
 `
 
-const TypeButton = ({ name, flag, setType }) => {
+const TypeButton = ({ name, typeFlag, setType }) => {
   const toggleType = () => {
     setType(name)
   }
+  
   return (
-    <Button className={flag ? "active" : "non-active"} onClick={toggleType}>
+    <Button typeFlag={typeFlag} onClick={toggleType}>
       { name }
     </Button>
   )

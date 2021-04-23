@@ -8,8 +8,8 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getLabels();
-      setLabels(() => [...data]);
+      const labelData = await getLabels();
+      setLabels(() => [labelData]);
     };
     fetchData();
   }, []);

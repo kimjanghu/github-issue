@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import LabelsNavbar from "../Labels/LabelsNavbar";
+import Navbar from "../Navbar/Navbar";
 import LabelsWrapper from "../Labels/LabelsWrapper";
 import LabelsFormSection from "../Labels/LabelsFormSection"
 
@@ -15,7 +15,7 @@ const Main = ({ labels }) => {
 
   return (
     <MainSection>
-      <LabelsNavbar 
+      <Navbar 
         type={type} 
         setType={setType} 
         setNewLabelFlag={setNewLabelFlag} 

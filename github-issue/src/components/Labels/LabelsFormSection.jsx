@@ -2,20 +2,16 @@ import React from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  display: none;
+  display: ${({ newLabelFlag }) => newLabelFlag ? "block" : "none" };
   width: 100%;
   margin-bottom: 32px;
   padding: 24px;
   background-color: #ebedf1;
-
-  &.active {
-    display: block
-  }
 `
 
 const LabelsFormSection = ({ newLabelFlag }) => {
   return (
-    <Wrapper className={newLabelFlag ? "active" : null}>
+    <Wrapper newLabelFlag={newLabelFlag}>
       <div>
         <button>Label preview</button>
       </div>

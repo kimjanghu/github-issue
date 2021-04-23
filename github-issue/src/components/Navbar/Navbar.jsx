@@ -16,8 +16,8 @@ const LabelsNavbar = ({ type, setType, setNewLabelFlag, newLabelFlag }) => {
   return (
     <Wrapper>
       <Type>
-        <TypeButton name="Labels" flag={type==="Labels"} setType={setType} />
-        <TypeButton name="Milestones" flag={type==="Milestones"} setType={setType} />
+        <TypeButton name="Labels" typeFlag={type==="Labels"} setType={setType} />
+        <TypeButton name="Milestones" typeFlag={type==="Milestones"} setType={setType} />
       </Type>
       <div>
         <OperationButton name="New label" setNewLabelFlag={setNewLabelFlag} newLabelFlag={newLabelFlag}/>
