@@ -31,9 +31,9 @@ export const getLabels = async () => {
   return data;
 };
 
-export const postLabels = (data) => {
+export const postLabels = async (data) => {
   const message = postMessageForm(data);
-  request(`${API_ENDPOINT}${URL.LABELS}`, message);
+  await request(`${API_ENDPOINT}${URL.LABELS}`, message);
 };
 
 export const editLabels = () => {};

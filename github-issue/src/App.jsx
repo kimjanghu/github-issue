@@ -9,7 +9,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       const labelData = await getLabels();
-      setLabels(() => [labelData]);
+      setLabels(() => [...labelData]);
     };
     fetchData();
   }, []);
@@ -17,7 +17,7 @@ const App = () => {
   return (
     <>
       <Header />
-      <Main labels={labels} />
+      <Main labels={labels} setLabels={setLabels}/>
     </>
   );
 };
