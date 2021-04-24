@@ -11,6 +11,7 @@ const Label = ({ labelName, color }) => {
 
 const LabelWrapper = styled.div`
   display: inline-block;
+  width: fit-content;
   padding: 8px;  
   border-radius: 3px;
   background-color: ${({ color }) => color};

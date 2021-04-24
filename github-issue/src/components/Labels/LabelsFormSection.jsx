@@ -40,6 +40,11 @@ const LabelsFormSection = ({ newLabelFlag, setNewLabelFlag, setLabels }) => {
     const labelData = await getLabels()
     setLabels(() => [...labelData])
     setNewLabelFlag(false)
+    setFormData({
+      name: "",
+      description: "",
+      color: DEFALUT_VALUE.DEFAULT_COLOR
+    })
   }
 
   return (
@@ -60,6 +65,7 @@ const LabelsFormSection = ({ newLabelFlag, setNewLabelFlag, setLabels }) => {
                 onChange={onChangeData}
                 className="label-name-label"
                 placeholder={LABEL_FORM.LABEL_NAME} 
+                value={name}
               />
             </LabelWrapper>
             <LabelWrapper>
@@ -69,6 +75,7 @@ const LabelsFormSection = ({ newLabelFlag, setNewLabelFlag, setLabels }) => {
                 onChange={onChangeData}
                 className="description-label"
                 placeholder={LABEL_FORM.DESCRIPTION + " (optional)"} 
+                value={description}
               />
             </LabelWrapper>
             <LabelWrapper>
@@ -98,7 +105,6 @@ const LabelsFormSection = ({ newLabelFlag, setNewLabelFlag, setLabels }) => {
 const Wrapper = styled.div`
   display: ${({ newLabelFlag }) => newLabelFlag ? "block" : "none" };
   width: 100%;
-  margin-bottom: 32px;
   padding: 24px;
   background-color: #ebedf1;
 `

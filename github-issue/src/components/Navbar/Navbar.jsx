@@ -11,8 +11,8 @@ const LabelsNavbar = ({ type, setType, setLabels }) => {
   const [newLabelFlag, setNewLabelFlag] = useState(false)
 
   return (
-    <>
-      <Wrapper>
+    <Navigation>
+      <Wrapper newLabelFlag={newLabelFlag}>
         <Type>
           <TypeButton 
             name={NAV_MANU.LABELS} 
@@ -39,14 +39,16 @@ const LabelsNavbar = ({ type, setType, setLabels }) => {
         setNewLabelFlag={setNewLabelFlag}
         setLabels={setLabels}
       />
-    </>
+    </Navigation>
   )
 }
-
-const Wrapper = styled.div`
+const Navigation = styled.div`
+  margin: 32px 0;
+`
+const Wrapper = styled.nav`
   display: flex;
   justify-content: space-between;
-  margin: 32px 0;
+  margin-bottom: ${({ newLabelFlag }) => "32px"};
 `
 const Type = styled.div`
   display: flex;

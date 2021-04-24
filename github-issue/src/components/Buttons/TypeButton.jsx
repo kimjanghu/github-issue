@@ -7,7 +7,7 @@ import styled from "styled-components";
 // }
 
 const Button = styled.div`
-  border: 1px solid #f6f8fa;
+  border: 1px solid #dbdee2;
   padding: 10px 16px;
   text-align: center;
   font-weight: bold;
