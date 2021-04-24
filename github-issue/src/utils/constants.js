@@ -1,5 +1,4 @@
 export const LABEL_FORM = {
-  LABEL_PREVIEW: "Label preview",
   LABEL_NAME: "Label Name",
   DESCRIPTION: "Description",
   COLOR: "Color",
@@ -17,4 +16,9 @@ export const BUTTON_NAME = {
   EDIT: "Edit",
   DELETE: "Delete",
   SAVE_CHANGES: "Save changes",
+};
+
+export const DEFALUT_VALUE = {
+  LABEL_PREVIEW: "Label preview",
+  DEFAULT_COLOR: "#bfd4f2",
 };
