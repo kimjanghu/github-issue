@@ -39,6 +39,7 @@ const LabelsFormSection = ({ newLabelFlag, setNewLabelFlag, setLabels }) => {
     await postLabels(formData)
     const labelData = await getLabels()
     setLabels(() => [...labelData])
+    setNewLabelFlag(false)
   }
 
   return (
