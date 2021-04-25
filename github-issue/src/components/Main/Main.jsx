@@ -24,6 +24,7 @@ const Main = ({ labels, setLabels }) => {
       />
       <LabelsWrapper
         labels={labels}
+        setLabels={setLabels}
       />
     </MainSection>
   );

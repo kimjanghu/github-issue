@@ -2,23 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import LabelList from "./LabelList";
 
-const LabelsWrapper = ({ labels }) => {
+const LabelsWrapper = ({ labels, setLabels }) => {
   const labelLength = labels.length
   
   return (
     <>
       <Header>{labelLength} labels</Header>
-      <LabelList labels={labels} />
+      <LabelList 
+        labels={labels} 
+        setLabels={setLabels}
+      />
     </>
   )
 }
-
-// const Wrapper = styled.section`
-//   li {
-//     height: 60px;
-//     border: 1px solid #000;
-//   }
-// `
 
 const Header = styled.div`
   display: flex;

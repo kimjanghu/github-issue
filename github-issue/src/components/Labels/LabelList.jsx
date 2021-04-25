@@ -1,17 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import LabelItems from "./LabelItems";
+import LabelItem from "./LabelItem";
 
-const LabelList = ({ labels }) => {
+const LabelList = ({ labels, setLabels }) => {
   const labelItem = labels.map((label) =>{
     const { id, name, description, color } = label
     return (
-      <LabelItems 
+      <LabelItem 
         id={id} 
         name={name} 
         description={description} 
         color={color} 
         key={label.id}
+        setLabels={setLabels}
       />
     )
   })

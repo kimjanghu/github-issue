@@ -38,6 +38,7 @@ const LabelsNavbar = ({ type, setType, setLabels }) => {
         newLabelFlag={newLabelFlag} 
         setNewLabelFlag={setNewLabelFlag}
         setLabels={setLabels}
+        labelItemData={false}
       />
     </Navigation>
   )
