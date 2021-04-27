@@ -4,13 +4,19 @@ const URL = {
   MILESTONES: "/milestones",
 };
 
-const postMessageForm = (data) => {
+const postMessageForm = (data, type) => {
   return {
-    method: "POST",
+    method: type ? "POST" : "PUT",
     body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
     },
+  };
+};
+
+const deleteMessageForm = () => {
+  return {
+    method: "DELETE",
   };
 };
 
@@ -31,11 +37,17 @@ export const getLabels = async () => {
   return data;
 };
 
-export const postLabels = (data) => {
-  const message = postMessageForm(data);
-  request(`${API_ENDPOINT}${URL.LABELS}`, message);
+export const postLabels = async (data) => {
+  const message = postMessageForm(data, true);
+  await request(`${API_ENDPOINT}${URL.LABELS}`, message);
 };
 
-export const editLabels = () => {};
+export const editLabels = async (data, id) => {
+  const message = postMessageForm(data, false);
+  await request(`${API_ENDPOINT}${URL.LABELS}/${id}`, message);
+};
 
-export const deleteLabels = () => {};
+export const deleteLabels = async (id) => {
+  const message = deleteMessageForm();
+  await request(`${API_ENDPOINT}${URL.LABELS}/${id}`, message);
+};
