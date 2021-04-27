@@ -4,9 +4,9 @@ const URL = {
   MILESTONES: "/milestones",
 };
 
-const postMessageForm = (data, type) => {
+const postMessageForm = (data, methodType) => {
   return {
-    method: type ? "POST" : "PUT",
+    method: methodType,
     body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
@@ -38,12 +38,12 @@ export const getLabels = async () => {
 };
 
 export const postLabels = async (data) => {
-  const message = postMessageForm(data, true);
+  const message = postMessageForm(data, "POST");
   await request(`${API_ENDPOINT}${URL.LABELS}`, message);
 };
 
 export const editLabels = async (data, id) => {
-  const message = postMessageForm(data, false);
+  const message = postMessageForm(data, "PUT");
   await request(`${API_ENDPOINT}${URL.LABELS}/${id}`, message);
 };
 

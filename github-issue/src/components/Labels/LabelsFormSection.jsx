@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { LABEL_FORM, BUTTON_NAME, DEFALUT_VALUE } from "../../utils/constants"
 import { selectColor } from "../../utils/utils"
@@ -7,19 +7,36 @@ import { getLabels, postLabels, editLabels } from "../../api/api"
 import Label from "./Label"
 import OperateButton from "../Buttons/OperateButton"
 
-const LabelsFormSection = ({ newLabelFlag, setNewLabelFlag, setLabels, labelItemData, onClickDeleteLabel }) => {
-  const [buttonFlag, setButtonFlag] = useState(true)
-  const [formData, setFormData] = useState({
+const LabelsFormSection = ({ 
+  newLabelFlag, 
+  setNewLabelFlag, 
+  setLabels, 
+  labelItemData = {
+    id: null,
     name: "",
     description: "",
     color: DEFALUT_VALUE.DEFAULT_COLOR
+  }, 
+  onClickDeleteLabel 
+}) => {
+  const { 
+    id: editFlag, 
+    name: editName, 
+    description: editDescription, 
+    color: editColor 
+  } = labelItemData
+  const [buttonFlag, setButtonFlag] = useState(editFlag ? false : true)
+  const [formData, setFormData] = useState({
+    name: editName,
+    description: editDescription,
+    color: editColor
   })
   const { name, description, color } = formData
-  const createLabel = labelItemData ? BUTTON_NAME.SAVE_CHANGES : BUTTON_NAME.CREATE_LABEL
+  const createLabel = labelItemData.id ? BUTTON_NAME.SAVE_CHANGES : BUTTON_NAME.CREATE_LABEL
   
   const onChangeData = (e) => {
     const { value, name } = e.target
-    if (name === "name") name === "name" && value ? setButtonFlag(false) : setButtonFlag(true)
+    if (name === "name") value ? setButtonFlag(false) : setButtonFlag(true)
       
     setFormData({
       ...formData,
@@ -37,7 +54,7 @@ const LabelsFormSection = ({ newLabelFlag, setNewLabelFlag, setLabels, labelItem
 
   const onSubmitFormData = async (e) => {
     e.preventDefault()
-    labelItemData ? await editLabels(formData, labelItemData.id) : await postLabels(formData)
+    editFlag ? await editLabels(formData, editFlag) : await postLabels(formData)
     const labelData = await getLabels()
     setLabels(() => [...labelData])
     setNewLabelFlag(false)
@@ -48,24 +65,10 @@ const LabelsFormSection = ({ newLabelFlag, setNewLabelFlag, setLabels, labelItem
     })
   }
 
-  useEffect(() => {
-    if (!labelItemData) return
-    const labelFormData = () => {
-      const { name, description, color } = labelItemData
-      setFormData({
-        name: name,
-        description: description,
-        color: color
-      })
-      setButtonFlag(false)
-    }
-    labelFormData();
-  }, [labelItemData])
-
   return (
     <Wrapper 
       newLabelFlag={newLabelFlag}
-      labelItemData={labelItemData}
+      editFlag={editFlag}
     >
       <Header>
         <Label 
@@ -73,7 +76,7 @@ const LabelsFormSection = ({ newLabelFlag, setNewLabelFlag, setLabels, labelItem
           color={color}
         />
         <Button 
-          labelItemData={labelItemData}
+          editFlag={editFlag}
           onClick={onClickDeleteLabel}
         >
           Delete
@@ -130,7 +133,7 @@ const Wrapper = styled.div`
   display: ${({ newLabelFlag }) => newLabelFlag ? "block" : "none" };
   width: 100%;
   padding: 24px;
-  background-color: ${({ labelItemData }) => labelItemData ? "#fff" : "#ebedf1"};
+  background-color: ${({ editFlag }) => editFlag ? "#fff" : "#ebedf1"};
   border: 1px solid #dbdee2
 `
 
@@ -140,7 +143,7 @@ const Header = styled.div`
 `
 
 const Button = styled.button`
-  display: ${({ labelItemData }) => labelItemData ? "block" : "none"};
+  display: ${({ editFlag }) => editFlag ? "block" : "none"};
   cursor: pointer;
   border: none;
   background: none;
