@@ -7,7 +7,7 @@ import TypeButton from "../Buttons/TypeButton";
 import OperationButton from "../Buttons/OperateButton";
 import LabelsFormSection from "../Labels/LabelsFormSection";
 
-const LabelsNavbar = ({ type, setType, setLabels }) => {
+const Navbar = ({ type, setType, setLabels }) => {
   const [newLabelFlag, setNewLabelFlag] = useState(false)
 
   return (
@@ -48,10 +48,10 @@ const Navigation = styled.div`
 const Wrapper = styled.nav`
   display: flex;
   justify-content: space-between;
-  margin-bottom: ${({ newLabelFlag }) => "32px"};
+  margin-bottom: 32px;
 `
 const Type = styled.div`
   display: flex;
 `
       
-export default LabelsNavbar;
+export default Navbar;
