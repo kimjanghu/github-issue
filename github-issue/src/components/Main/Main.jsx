@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { NAV_MANU } from "../../utils/constants"
-import { getLabels } from "../../api/api";
+
 
 import Navbar from "../Navbar/Navbar";
-import LabelsWrapper from "../Labels/LabelsWrapper";
+import { LabelsWrapper } from "../Labels/LabelsWrapper";
 import MilestonesWrapper from "../Milestones/MilestonesWrapper";
 
 const renderTypeComponent = ({ renderType, props }) => {
@@ -18,18 +18,8 @@ const renderTypeComponent = ({ renderType, props }) => {
 
 const Main = () => {
   const [type, setType] = useState(NAV_MANU.LABELS);
-  const [labels, setLabels] = useState([]);
-  const [milestones, setMilestones] = useState([]);
   const [newTypeFlag, setNewTypeFlag] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const labelData = await getLabels();
-      setLabels(() => [...labelData]);
-    };
-    fetchData();
-  }, []);
-  
   return (
     <MainSection>
       <Navbar 
@@ -41,7 +31,7 @@ const Main = () => {
       {
         renderTypeComponent({
           renderType: type,
-          props: type === NAV_MANU.LABELS ? { labels, setLabels, newTypeFlag, setNewTypeFlag } : { milestones, setMilestones, newTypeFlag, setNewTypeFlag }
+          props: type === NAV_MANU.LABELS ? { newTypeFlag, setNewTypeFlag } : { newTypeFlag, setNewTypeFlag }
         })
       }
     </MainSection>

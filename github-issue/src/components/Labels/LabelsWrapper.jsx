@@ -1,24 +1,40 @@
-import React from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import styled from "styled-components";
+import { getLabels } from "../../api/api";
 import LabelList from "./LabelList";
 import LabelsFormSection from "./LabelsFormSection";
 
-const LabelsWrapper = ({ labels, setLabels, newTypeFlag, setNewTypeFlag }) => {
-  const labelLength = labels.length
+export const LabelsContext = React.createContext();
+
+const initialLabelState = { labels: [] };
+
+const labelReducer = (state, action) => {
+  switch (action.type) {
+    case "SET_LABELS":
+      return { labels: [...action.payload] }
+  }
+}
+
+export const LabelsWrapper = ({ newTypeFlag, setNewTypeFlag }) => {
+  const [labelsState, labelsDispatch] = useReducer(labelReducer, initialLabelState)
+  const { labels } = labelsState
+  useEffect(() => {
+    const fetchData = async () => {
+      const labelData = await getLabels();
+      labelsDispatch({ type: "SET_LABELS", payload: [...labelData] })
+    };
+    fetchData();
+  }, []);
   
   return (
-    <>
+    <LabelsContext.Provider value={{ labelsState, labelsDispatch }}>
       <LabelsFormSection 
         newTypeFlag={newTypeFlag} 
         setNewTypeFlag={setNewTypeFlag}
-        setLabels={setLabels}
       />
-      <Header>{labelLength} labels</Header>
-      <LabelList 
-        labels={labels} 
-        setLabels={setLabels}
-      />
-    </>
+      <Header>{labels.length} labels</Header>
+      <LabelList />
+    </LabelsContext.Provider>
   )
 }
 
@@ -32,5 +48,3 @@ const Header = styled.div`
   font-weight: bold;
   font-size: 16px;
 `
-
-export default LabelsWrapper;

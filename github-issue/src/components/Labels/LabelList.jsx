@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import LabelItem from "./LabelItem";
+import { LabelsContext } from "./LabelsWrapper";
 
-const LabelList = ({ labels, setLabels }) => {
+const LabelList = () => {
+  const { labelsState: { labels } } = useContext(LabelsContext)
   const labelItem = labels.map((label) =>{
     const { id, name, description, color } = label
     return (
@@ -12,7 +14,6 @@ const LabelList = ({ labels, setLabels }) => {
         description={description} 
         color={color} 
         key={label.id}
-        setLabels={setLabels}
       />
     )
   })
