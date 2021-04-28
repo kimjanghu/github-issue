@@ -7,15 +7,19 @@ import { getLabels, postLabels, editLabels } from "../../api/api"
 import Label from "./Label"
 import OperateButton from "../Buttons/OperateButton"
 
+const initialFormData = {
+  name: "",
+  description: "",
+  color: DEFALUT_VALUE.DEFAULT_COLOR
+}
+
 const LabelsFormSection = ({ 
-  newLabelFlag, 
-  setNewLabelFlag, 
+  newTypeFlag, 
+  setNewTypeFlag, 
   setLabels, 
   labelItemData = {
-    id: null,
-    name: "",
-    description: "",
-    color: DEFALUT_VALUE.DEFAULT_COLOR
+    ...initialFormData,
+    id: null
   }, 
   onClickDeleteLabel 
 }) => {
@@ -57,17 +61,16 @@ const LabelsFormSection = ({
     editFlag ? await editLabels(formData, editFlag) : await postLabels(formData)
     const labelData = await getLabels()
     setLabels(() => [...labelData])
-    setNewLabelFlag(false)
+    setNewTypeFlag(false)
     setFormData({
-      name: "",
-      description: "",
-      color: DEFALUT_VALUE.DEFAULT_COLOR
+      ...initialFormData,
     })
+    setButtonFlag(true)
   }
 
   return (
     <Wrapper 
-      newLabelFlag={newLabelFlag}
+      newTypeFlag={newTypeFlag}
       editFlag={editFlag}
     >
       <Header>
@@ -118,8 +121,8 @@ const LabelsFormSection = ({
             <OperateButton 
               name={BUTTON_NAME.CANCEL} 
               buttonType={false} 
-              setNewLabelFlag={setNewLabelFlag} 
-              newLabelFlag={setNewLabelFlag}
+              setNewTypeFlag={setNewTypeFlag} 
+              newTypeFlag={newTypeFlag}
             />
             <SubmitButton disabled={buttonFlag}>{createLabel}</SubmitButton>
           </FormOperationWrapper>
@@ -130,7 +133,8 @@ const LabelsFormSection = ({
 };
 
 const Wrapper = styled.div`
-  display: ${({ newLabelFlag }) => newLabelFlag ? "block" : "none" };
+  display: ${({ newTypeFlag }) => newTypeFlag ? "block" : "none" };
+  margin-bottom: ${({ newTypeFlag }) => newTypeFlag ? "32px" : "0" };
   width: 100%;
   padding: 24px;
   background-color: ${({ editFlag }) => editFlag ? "#fff" : "#ebedf1"};

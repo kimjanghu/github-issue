@@ -1,12 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import LabelList from "./LabelList";
+import LabelsFormSection from "./LabelsFormSection";
 
-const LabelsWrapper = ({ labels, setLabels }) => {
+const LabelsWrapper = ({ labels, setLabels, newTypeFlag, setNewTypeFlag }) => {
   const labelLength = labels.length
   
   return (
     <>
+      <LabelsFormSection 
+        newTypeFlag={newTypeFlag} 
+        setNewTypeFlag={setNewTypeFlag}
+        setLabels={setLabels}
+      />
       <Header>{labelLength} labels</Header>
       <LabelList 
         labels={labels} 

@@ -39,8 +39,8 @@ const LabelItem = ({ id, name, description, color, setLabels }) => {
         </LabelButtonWrapper>
       </LabelItemWrapper>
       <LabelsFormSection 
-        newLabelFlag={editLabelFlag}
-        setNewLabelFlag={setEditLabelFlag}
+        newTypeFlag={editLabelFlag}
+        setNewTypeFlag={setEditLabelFlag}
         setLabels={setLabels}
         labelItemData={labelItemData}
         onClickDeleteLabel={onClickDeleteLabel}

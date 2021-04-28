@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { NAV_MANU, BUTTON_NAME } from "../../utils/constants";
 
 import TypeButton from "../Buttons/TypeButton";
 import OperationButton from "../Buttons/OperateButton";
-import LabelsFormSection from "../Labels/LabelsFormSection";
 
-const Navbar = ({ type, setType, setLabels }) => {
-  const [newLabelFlag, setNewLabelFlag] = useState(false)
-
+const Navbar = ({ type, setType, newTypeFlag, setNewTypeFlag }) => {
   return (
     <Navigation>
-      <Wrapper newLabelFlag={newLabelFlag}>
+      <Wrapper newTypeFlag={newTypeFlag}>
         <Type>
           <TypeButton 
             name={NAV_MANU.LABELS} 
@@ -28,17 +25,12 @@ const Navbar = ({ type, setType, setLabels }) => {
         <div>
           <OperationButton 
             name={BUTTON_NAME.NEW_LABEL} 
-            setNewLabelFlag={setNewLabelFlag} 
-            newLabelFlag={newLabelFlag}
+            setNewTypeFlag={setNewTypeFlag} 
+            newTypeFlag={newTypeFlag}
             buttonType={true}
           />
         </div>
       </Wrapper>
-      <LabelsFormSection 
-        newLabelFlag={newLabelFlag} 
-        setNewLabelFlag={setNewLabelFlag}
-        setLabels={setLabels}
-      />
     </Navigation>
   )
 }
