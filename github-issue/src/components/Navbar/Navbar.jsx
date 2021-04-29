@@ -1,12 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-import { NAV_MANU, BUTTON_NAME } from "../../utils/constants";
+import { NAV_MANU } from "../../utils/constants";
 
 import TypeButton from "../Buttons/TypeButton";
 import OperationButton from "../Buttons/OperateButton";
 
+const NEW_LABEL = "New label"
+const NEW_MILESTONE = "New milestone"
+
 const Navbar = ({ type, setType, newTypeFlag, setNewTypeFlag }) => {
+  const selectedNewType = type === NAV_MANU.LABELS ? NEW_LABEL : NEW_MILESTONE
   return (
     <Navigation>
       <Wrapper newTypeFlag={newTypeFlag}>
@@ -24,7 +28,7 @@ const Navbar = ({ type, setType, newTypeFlag, setNewTypeFlag }) => {
         </Type>
         <div>
           <OperationButton 
-            name={BUTTON_NAME.NEW_LABEL} 
+            name={selectedNewType} 
             setNewTypeFlag={setNewTypeFlag} 
             newTypeFlag={newTypeFlag}
             buttonType={true}
