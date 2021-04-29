@@ -5,7 +5,7 @@ import { selectColor } from "../../utils/utils"
 import { getLabels, postLabels, editLabels } from "../../api/api"
 
 import Label from "./Label"
-import { LabelsContext } from "./LabelsWrapper";
+import { LabelsContext } from "./LabelsContext";
 import OperateButton from "../Buttons/OperateButton"
 
 const initialFormData = {

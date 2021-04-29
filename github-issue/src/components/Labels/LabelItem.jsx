@@ -4,7 +4,7 @@ import { getLabels, deleteLabels } from "../../api/api"
 
 import Label from "./Label";
 import LabelsFormSection from './LabelsFormSection';
-import { LabelsContext } from "./LabelsWrapper";
+import { LabelsContext } from "./LabelsContext";
 
 const LabelItem = ({ id, name, description, color }) => {
   const { labelsDispatch } = useContext(LabelsContext)

@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useReducer } from "react";
 import styled from "styled-components";
 import { getLabels } from "../../api/api";
+import { LabelsContext } from "./LabelsContext"
 import LabelList from "./LabelList";
 import LabelsFormSection from "./LabelsFormSection";
-
-export const LabelsContext = React.createContext();
 
 const initialLabelState = { labels: [] };
 
@@ -48,3 +47,5 @@ const Header = styled.div`
   font-weight: bold;
   font-size: 16px;
 `
+
+export default LabelsWrapper;

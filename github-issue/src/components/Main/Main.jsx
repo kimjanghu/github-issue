@@ -5,7 +5,7 @@ import { NAV_MANU } from "../../utils/constants"
 
 
 import Navbar from "../Navbar/Navbar";
-import { LabelsWrapper } from "../Labels/LabelsWrapper";
+import LabelsWrapper from "../Labels/LabelsWrapper";
 import MilestonesWrapper from "../Milestones/MilestonesWrapper";
 
 const renderTypeComponent = ({ renderType, props }) => {
