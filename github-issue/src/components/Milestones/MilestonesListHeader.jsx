@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import { MilestonesContext } from "./MilestonesContext";
-import { MILESTONES_STATUS } from "../../utils/constants"
+import { MilestonesContext } from "../../Context/Context";
+import { MILESTONES_STATUS } from "../../utils/constants";
 
 const { OPEN, CLOSED } = MILESTONES_STATUS
 

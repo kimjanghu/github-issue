@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import MilestonesItem from "./MilestonesItem";
-import { MilestonesContext } from "./MilestonesContext";
+import { MilestonesContext } from "../../Context/Context";
 import { MILESTONES_STATUS } from "../../utils/constants";
 
 const { OPEN, CLOSED } = MILESTONES_STATUS
