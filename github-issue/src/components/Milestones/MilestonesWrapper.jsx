@@ -4,7 +4,10 @@ import { MilestonesContext } from "./MilestonesContext";
 import MilestonesFormSection from "./MilestonesFormSection";
 import MilestonesListSection from "./MilestonesListSection";
 
-const initailMilestoneState = { milestones: {} };
+const initailMilestoneState = { milestones: {
+  openMilestones: [],
+  closedMilestones: []
+} };
 
 const milestoneReducer = (state, action) => {
   switch (action.type) {
@@ -27,7 +30,7 @@ const MilestonesWrapper = ({ newTypeFlag, setNewTypeFlag }) => {
     const getMilestonesData = async () => {
       const milestoneData = await getMilestones();
       milestoneDispatch({ type: "SET_MILESTONES", payload: {
-        openedMilestones: [...milestoneData.filter(item => item.status === "open")],
+        openMilestones: [...milestoneData.filter(item => item.status === "open")],
         closedMilestones: [...milestoneData.filter(item => item.status === "close")]
       } });
     };
