@@ -39,7 +39,8 @@ export const getLabels = async () => {
 
 export const postLabels = async (data) => {
   const message = postMessageForm(data, "POST");
-  await request(`${API_ENDPOINT}${URL.LABELS}`, message);
+  const newLabelData = await request(`${API_ENDPOINT}${URL.LABELS}`, message);
+  return newLabelData;
 };
 
 export const editLabels = async (data, id) => {
@@ -55,4 +56,13 @@ export const deleteLabels = async (id) => {
 export const getMilestones = async () => {
   const milestoneData = await request(`${API_ENDPOINT}${URL.MILESTONES}`);
   return milestoneData;
+};
+
+export const postMilestones = async (data) => {
+  const message = postMessageForm(data, "POST");
+  const newMilestoneData = await request(
+    `${API_ENDPOINT}${URL.MILESTONES}`,
+    message
+  );
+  return newMilestoneData;
 };

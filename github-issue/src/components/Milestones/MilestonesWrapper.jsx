@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from "react";
 import { getMilestones } from '../../api/api';
-import { MilestonesContext } from "./MilestonesContext";
+import { MilestonesContext } from "../../Context/Context";
 import MilestonesFormSection from "./MilestonesFormSection";
 import MilestonesListSection from "./MilestonesListSection";
 
@@ -13,6 +13,8 @@ const milestoneReducer = (state, action) => {
   switch (action.type) {
     case "SET_MILESTONES":
       return { milestones: {...action.payload} };
+    case "SET_NEW_MILESTONES":
+      return { milestones: {...state.milestones, openMilestones: [...state.milestones.openMilestones, action.payload]} }
     default:
       throw new Error();
   }
