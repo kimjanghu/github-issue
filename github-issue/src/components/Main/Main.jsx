@@ -31,7 +31,7 @@ const Main = () => {
       {
         renderTypeComponent({
           renderType: type,
-          props: type === NAV_MANU.LABELS ? { newTypeFlag, setNewTypeFlag } : { newTypeFlag, setNewTypeFlag }
+          props: { newTypeFlag, setNewTypeFlag }
         })
       }
     </MainSection>
