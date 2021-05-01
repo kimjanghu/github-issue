@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
 import styled from "styled-components";
 import { getLabels } from "../../api/api";
-import { LabelsContext } from "./LabelsContext"
+import { LabelsContext } from "../../Context/Context";
 import LabelList from "./LabelList";
 import LabelsFormSection from "./LabelsFormSection";
 

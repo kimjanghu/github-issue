@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { LABEL_FORM, BUTTON_NAME, DEFALUT_VALUE } from "../../utils/constants"
-import { selectColor } from "../../utils/utils"
+import { selectColor } from "../../utils/utils";
 import { getLabels, postLabels, editLabels } from "../../api/api"
 
-import Label from "./Label"
-import { LabelsContext } from "./LabelsContext";
-import OperateButton from "../Buttons/OperateButton"
+import Label from "./Label";
+import { LabelsContext } from "../../Context/Context";
+import OperateButton from "../Buttons/OperateButton";
 
 const initialFormData = {
   name: "",

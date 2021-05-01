@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import LabelItem from "./LabelItem";
-import { LabelsContext } from "./LabelsContext";
+import { LabelsContext } from "../../Context/Context";
 
 const LabelList = () => {
   const { labelsState: { labels } } = useContext(LabelsContext)
