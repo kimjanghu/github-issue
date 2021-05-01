@@ -11,6 +11,8 @@ const labelReducer = (state, action) => {
   switch (action.type) {
     case "SET_LABELS":
       return { labels: [...action.payload] }
+    default:
+      throw new Error();
   }
 }
 
