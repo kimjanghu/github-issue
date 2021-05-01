@@ -51,3 +51,8 @@ export const deleteLabels = async (id) => {
   const message = deleteMessageForm();
   await request(`${API_ENDPOINT}${URL.LABELS}/${id}`, message);
 };
+
+export const getMilestones = async () => {
+  const milestoneData = await request(`${API_ENDPOINT}${URL.MILESTONES}`);
+  return milestoneData;
+};
