@@ -1,8 +1,12 @@
 import React, { useEffect, useReducer } from "react";
 import { getMilestones } from '../../api/api';
 import { MilestonesContext } from "../../Context/Context";
+import { NAV_MANU } from "../../utils/constants";
 import MilestonesFormSection from "./MilestonesFormSection";
 import MilestonesListSection from "./MilestonesListSection";
+import useFetch from "../../Hooks/Hooks";
+
+const { MILESTONES } = NAV_MANU
 
 const initailMilestoneState = { milestones: {
   openMilestones: [],
@@ -27,17 +31,17 @@ const renderMilestonesWrapper = ({ renderType, props }) => {
 
 const MilestonesWrapper = ({ newTypeFlag, setNewTypeFlag }) => {
   const [milestoneState, milestoneDispatch] = useReducer(milestoneReducer, initailMilestoneState);
-  
+  const { state, loading } = useFetch(MILESTONES);
+
   useEffect(() => {
     const getMilestonesData = async () => {
-      const milestoneData = await getMilestones();
       milestoneDispatch({ type: "SET_MILESTONES", payload: {
-        openMilestones: [...milestoneData.filter(item => item.status === "open")],
-        closedMilestones: [...milestoneData.filter(item => item.status === "close")]
+        openMilestones: [...state.filter(item => item.status === "open")],
+        closedMilestones: [...state.filter(item => item.status === "close")]
       } });
     };
     getMilestonesData();
-  }, [])
+  }, [state])
 
   return (
     <MilestonesContext.Provider value={{ milestoneState, milestoneDispatch }}>
