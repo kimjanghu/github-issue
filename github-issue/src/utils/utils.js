@@ -1,9 +1,11 @@
-export const delay = (time) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve("Success");
-    }, time);
-  });
+import { MONTH } from "./constants";
+
+export const delay = (time) =>
+  new Promise((resolve, reject) => setTimeout(() => resolve("Success"), time));
+
+export const changeDateToDueDate = (date) => {
+  const [year, month, day] = date.split(".");
+  return `${MONTH[Number(month)]} ${day}, ${year}`;
 };
 
 export const selectColor = () => {
