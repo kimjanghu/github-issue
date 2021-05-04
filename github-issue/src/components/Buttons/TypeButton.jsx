@@ -16,9 +16,11 @@ const Button = styled.div`
   background-color: ${({ typeFlag }) => typeFlag ? "#0f65d7" : "#fff"};
 `
 
-const TypeButton = ({ name, typeFlag, setType }) => {
+const TypeButton = ({ name, typeFlag, type, setType, setNewTypeFlag }) => {
   const toggleType = () => {
+    if (name === type) return
     setType(name)
+    setNewTypeFlag(false)
   }
   
   return (

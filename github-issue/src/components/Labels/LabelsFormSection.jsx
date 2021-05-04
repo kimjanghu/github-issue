@@ -1,25 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { LABEL_FORM, BUTTON_NAME, DEFALUT_VALUE } from "../../utils/constants"
-import { selectColor } from "../../utils/utils"
+import { selectColor } from "../../utils/utils";
 import { getLabels, postLabels, editLabels } from "../../api/api"
 
-import Label from "./Label"
-import OperateButton from "../Buttons/OperateButton"
+import Label from "./Label";
+import { LabelsContext } from "../../Context/Context";
+import OperateButton from "../Buttons/OperateButton";
 
-const LabelsFormSection = ({ newLabelFlag, setNewLabelFlag, setLabels, labelItemData, onClickDeleteLabel }) => {
-  const [buttonFlag, setButtonFlag] = useState(true)
+const initialFormData = {
+  name: "",
+  description: "",
+  color: DEFALUT_VALUE.DEFAULT_COLOR
+}
+
+const LabelsFormSection = ({ 
+  newTypeFlag, 
+  setNewTypeFlag, 
+  labelItemData = {
+    ...initialFormData,
+    id: null
+  }, 
+  onClickDeleteLabel 
+}) => {
+  const { labelsDispatch } = useContext(LabelsContext)
+  const { 
+    id: editFlag, 
+    name: editName, 
+    description: editDescription, 
+    color: editColor 
+  } = labelItemData
+  const [buttonFlag, setButtonFlag] = useState(editFlag ? false : true)
   const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    color: DEFALUT_VALUE.DEFAULT_COLOR
+    name: editName,
+    description: editDescription,
+    color: editColor
   })
   const { name, description, color } = formData
-  const createLabel = labelItemData ? BUTTON_NAME.SAVE_CHANGES : BUTTON_NAME.CREATE_LABEL
+  const createLabel = labelItemData.id ? BUTTON_NAME.SAVE_CHANGES : BUTTON_NAME.CREATE_LABEL
   
   const onChangeData = (e) => {
     const { value, name } = e.target
-    if (name === "name") name === "name" && value ? setButtonFlag(false) : setButtonFlag(true)
+    if (name === "name") value ? setButtonFlag(false) : setButtonFlag(true)
       
     setFormData({
       ...formData,
@@ -37,35 +59,20 @@ const LabelsFormSection = ({ newLabelFlag, setNewLabelFlag, setLabels, labelItem
 
   const onSubmitFormData = async (e) => {
     e.preventDefault()
-    labelItemData ? await editLabels(formData, labelItemData.id) : await postLabels(formData)
+    editFlag ? await editLabels(formData, editFlag) : await postLabels(formData)
     const labelData = await getLabels()
-    setLabels(() => [...labelData])
-    setNewLabelFlag(false)
+    labelsDispatch({ type: "SET_LABELS", payload: [...labelData] })
+    setNewTypeFlag(false)
     setFormData({
-      name: "",
-      description: "",
-      color: DEFALUT_VALUE.DEFAULT_COLOR
+      ...initialFormData,
     })
+    setButtonFlag(true)
   }
-
-  useEffect(() => {
-    if (!labelItemData) return
-    const labelFormData = () => {
-      const { name, description, color } = labelItemData
-      setFormData({
-        name: name,
-        description: description,
-        color: color
-      })
-      setButtonFlag(false)
-    }
-    labelFormData();
-  }, [labelItemData])
 
   return (
     <Wrapper 
-      newLabelFlag={newLabelFlag}
-      labelItemData={labelItemData}
+      newTypeFlag={newTypeFlag}
+      editFlag={editFlag}
     >
       <Header>
         <Label 
@@ -73,7 +80,7 @@ const LabelsFormSection = ({ newLabelFlag, setNewLabelFlag, setLabels, labelItem
           color={color}
         />
         <Button 
-          labelItemData={labelItemData}
+          editFlag={editFlag}
           onClick={onClickDeleteLabel}
         >
           Delete
@@ -115,8 +122,8 @@ const LabelsFormSection = ({ newLabelFlag, setNewLabelFlag, setLabels, labelItem
             <OperateButton 
               name={BUTTON_NAME.CANCEL} 
               buttonType={false} 
-              setNewLabelFlag={setNewLabelFlag} 
-              newLabelFlag={setNewLabelFlag}
+              setNewTypeFlag={setNewTypeFlag} 
+              newTypeFlag={newTypeFlag}
             />
             <SubmitButton disabled={buttonFlag}>{createLabel}</SubmitButton>
           </FormOperationWrapper>
@@ -127,10 +134,11 @@ const LabelsFormSection = ({ newLabelFlag, setNewLabelFlag, setLabels, labelItem
 };
 
 const Wrapper = styled.div`
-  display: ${({ newLabelFlag }) => newLabelFlag ? "block" : "none" };
+  display: ${({ newTypeFlag }) => newTypeFlag ? "block" : "none" };
+  margin-bottom: ${({ newTypeFlag }) => newTypeFlag ? "32px" : "0" };
   width: 100%;
   padding: 24px;
-  background-color: ${({ labelItemData }) => labelItemData ? "#fff" : "#ebedf1"};
+  background-color: ${({ editFlag }) => editFlag ? "#fff" : "#ebedf1"};
   border: 1px solid #dbdee2
 `
 
@@ -140,7 +148,7 @@ const Header = styled.div`
 `
 
 const Button = styled.button`
-  display: ${({ labelItemData }) => labelItemData ? "block" : "none"};
+  display: ${({ editFlag }) => editFlag ? "block" : "none"};
   cursor: pointer;
   border: none;
   background: none;

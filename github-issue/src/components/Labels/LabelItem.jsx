@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { getLabels, deleteLabels } from "../../api/api"
 
 import Label from "./Label";
 import LabelsFormSection from './LabelsFormSection';
+import { LabelsContext } from "../../Context/Context";
 
-const LabelItem = ({ id, name, description, color, setLabels }) => {
+const LabelItem = ({ id, name, description, color }) => {
+  const { labelsDispatch } = useContext(LabelsContext)
   const [editLabelFlag, setEditLabelFlag] = useState(false)
   const labelItemData = {
     id, 
@@ -19,7 +21,7 @@ const LabelItem = ({ id, name, description, color, setLabels }) => {
     e.preventDefault()
     await deleteLabels(id)
     const labelData = await getLabels()
-    setLabels(() => [...labelData])
+    labelsDispatch({ type: "SET_LABELS", payload: [...labelData] })
     if (editLabelFlag) {
       setEditLabelFlag(false)
     }
@@ -39,9 +41,8 @@ const LabelItem = ({ id, name, description, color, setLabels }) => {
         </LabelButtonWrapper>
       </LabelItemWrapper>
       <LabelsFormSection 
-        newLabelFlag={editLabelFlag}
-        setNewLabelFlag={setEditLabelFlag}
-        setLabels={setLabels}
+        newTypeFlag={editLabelFlag}
+        setNewTypeFlag={setEditLabelFlag}
         labelItemData={labelItemData}
         onClickDeleteLabel={onClickDeleteLabel}
       />

@@ -1,58 +1,55 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
-import { NAV_MANU, BUTTON_NAME } from "../../utils/constants";
+import { NAV_MANU } from "../../utils/constants";
 
 import TypeButton from "../Buttons/TypeButton";
 import OperationButton from "../Buttons/OperateButton";
-import LabelsFormSection from "../Labels/LabelsFormSection";
 
-const LabelsNavbar = ({ type, setType, setLabels }) => {
-  const [newLabelFlag, setNewLabelFlag] = useState(false)
+const NEW_LABEL = "New label"
+const NEW_MILESTONE = "New milestone"
 
+const Navbar = ({ type, setType, newTypeFlag, setNewTypeFlag }) => {
+  const selectedNewType = type === NAV_MANU.LABELS ? NEW_LABEL : NEW_MILESTONE
+  const renderTypeButton = ({ typeName, props }) => {
+    return typeName.map(name => <TypeButton key={name} name={name} typeFlag={type===name} {...props}></TypeButton>)
+  }
+  
   return (
     <Navigation>
-      <Wrapper newLabelFlag={newLabelFlag}>
+      <Wrapper newTypeFlag={newTypeFlag}>
         <Type>
-          <TypeButton 
-            name={NAV_MANU.LABELS} 
-            typeFlag={type===NAV_MANU.LABELS}
-            setType={setType}
-          />
-          <TypeButton 
-            name={NAV_MANU.MILESTONES} 
-            typeFlag={type===NAV_MANU.MILESTONES} 
-            setType={setType} 
-          />
+          {
+            renderTypeButton({
+              typeName: [NAV_MANU.LABELS, NAV_MANU.MILESTONES],
+              props: { type, setType, setNewTypeFlag }
+            })
+          }
+          
         </Type>
         <div>
           <OperationButton 
-            name={BUTTON_NAME.NEW_LABEL} 
-            setNewLabelFlag={setNewLabelFlag} 
-            newLabelFlag={newLabelFlag}
+            name={selectedNewType} 
+            setNewTypeFlag={setNewTypeFlag} 
+            newTypeFlag={newTypeFlag}
             buttonType={true}
           />
         </div>
       </Wrapper>
-      <LabelsFormSection 
-        newLabelFlag={newLabelFlag} 
-        setNewLabelFlag={setNewLabelFlag}
-        setLabels={setLabels}
-        labelItemData={false}
-      />
     </Navigation>
   )
 }
+
 const Navigation = styled.div`
   margin: 32px 0;
 `
 const Wrapper = styled.nav`
   display: flex;
   justify-content: space-between;
-  margin-bottom: ${({ newLabelFlag }) => "32px"};
+  margin-bottom: 32px;
 `
 const Type = styled.div`
   display: flex;
 `
       
-export default LabelsNavbar;
+export default Navbar;

@@ -4,9 +4,9 @@ const URL = {
   MILESTONES: "/milestones",
 };
 
-const postMessageForm = (data, type) => {
+const postMessageForm = (data, methodType) => {
   return {
-    method: type ? "POST" : "PUT",
+    method: methodType,
     body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
@@ -38,16 +38,31 @@ export const getLabels = async () => {
 };
 
 export const postLabels = async (data) => {
-  const message = postMessageForm(data, true);
-  await request(`${API_ENDPOINT}${URL.LABELS}`, message);
+  const message = postMessageForm(data, "POST");
+  const newLabelData = await request(`${API_ENDPOINT}${URL.LABELS}`, message);
+  return newLabelData;
 };
 
 export const editLabels = async (data, id) => {
-  const message = postMessageForm(data, false);
+  const message = postMessageForm(data, "PUT");
   await request(`${API_ENDPOINT}${URL.LABELS}/${id}`, message);
 };
 
 export const deleteLabels = async (id) => {
   const message = deleteMessageForm();
   await request(`${API_ENDPOINT}${URL.LABELS}/${id}`, message);
+};
+
+export const getMilestones = async () => {
+  const milestoneData = await request(`${API_ENDPOINT}${URL.MILESTONES}`);
+  return milestoneData;
+};
+
+export const postMilestones = async (data) => {
+  const message = postMessageForm(data, "POST");
+  const newMilestoneData = await request(
+    `${API_ENDPOINT}${URL.MILESTONES}`,
+    message
+  );
+  return newMilestoneData;
 };

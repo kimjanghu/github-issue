@@ -12,9 +12,9 @@ const Button = styled.div`
   background-color: ${({ buttonType }) => buttonType ? "#31c453" : "#ebedf1"};
 `
 
-const OperateButton = ({ name, setNewLabelFlag, newLabelFlag, buttonType }) => {
+const OperateButton = ({ name, setNewTypeFlag, newTypeFlag, buttonType }) => {
   const toggleNewLabelFlag = () => {
-    setNewLabelFlag(!newLabelFlag)
+    setNewTypeFlag(!newTypeFlag)
   }
   return (
     <Button buttonType={buttonType} onClick={toggleNewLabelFlag}>
